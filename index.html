@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iTabs Content Merger Tool</title>
+    <title>iTabs Affiliate Content Merger Tool</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -35,6 +35,12 @@
             margin-bottom: 15px;
             border-bottom: 2px solid #e5e7eb;
             padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #1f2937;
+            margin-top: 20px;
+            margin-bottom: 10px;
         }
 
         .tool-section {
@@ -85,6 +91,14 @@
             background-color: #6b7280;
         }
 
+        .btn-success {
+            background-color: #10b981;
+        }
+
+        .btn-success:hover {
+            background-color: #059669;
+        }
+
         .action-bar {
             display: flex;
             gap: 10px;
@@ -96,7 +110,7 @@
         }
 
         .snippet-container {
-            margin-bottom: 15px;
+            margin-bottom: 30px;
             border: 1px solid #e5e7eb;
             border-radius: 5px;
             overflow: hidden;
@@ -113,8 +127,6 @@
 
         .snippet-content {
             padding: 15px;
-            max-height: 150px;
-            overflow-y: auto;
             background-color: #f9fafb;
         }
 
@@ -182,7 +194,57 @@
             padding: 20px;
         }
 
-        /* iTabs Styling */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .tabs-editor {
+            border: 1px solid #d1d5db;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: #f9fafb;
+        }
+
+        .tab-row {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #d1d5db;
+        }
+
+        .spacer {
+            margin-top: 10px;
+        }
+
+        .affiliate-section {
+            background-color: #fef3c7;
+            border: 1px solid #fcd34d;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .affiliate-title {
+            color: #92400e;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        /* iTabs Preview Styling */
         .itab-container {
             font-family: -apple-system, system-ui, sans-serif;
             max-width: 100%;
@@ -254,14 +316,14 @@
 </head>
 <body>
     <div class="container">
-        <h1>iTabs Content Merger Tool</h1>
+        <h1>iTabs Affiliate Content Merger Tool</h1>
         
         <div class="instructions">
-            <p><strong>How to use this tool:</strong></p>
+            <p><strong>How to use this enhanced tool:</strong></p>
             <ol>
                 <li>Paste your article content in the "Article Content" box</li>
-                <li>Make sure to include placeholder tags like <code>[INSERT iTABS CODE HERE FOR "interactive popups"]</code> where you want iTabs to appear</li>
-                <li>Use the "Load Sample" buttons to populate the fields with examples or create your own iTabs</li>
+                <li>Make sure to include placeholder tags like <code>[INSERT iTABS CODE HERE FOR "wireless headphones"]</code> where you want iTabs to appear</li>
+                <li>Create customized iTabs with your own content, images, and affiliate links</li>
                 <li>Click "Merge Content" to combine your article with the iTabs</li>
                 <li>Preview the result and copy the final HTML for your website</li>
             </ol>
@@ -270,7 +332,7 @@
         <h2>Step 1: Paste Your Article Content</h2>
         <div class="tool-section">
             <div class="left-panel">
-                <textarea id="articleContent" placeholder="Paste your article content here with [INSERT iTABS CODE HERE FOR "your term"] placeholders..."></textarea>
+                <textarea id="articleContent" placeholder="Paste your article content here with [INSERT iTABS CODE HERE FOR &quot;your term&quot;] placeholders..."></textarea>
                 <div class="action-bar">
                     <button class="btn" id="loadSampleArticle">Load Sample Article</button>
                     <button class="btn btn-secondary" id="clearArticle">Clear</button>
@@ -279,60 +341,220 @@
             <div class="right-panel">
                 <h3>Article Instructions</h3>
                 <p>Your article should include special placeholders where you want iTabs to appear. For example:</p>
-                <pre style="background: #f1f5f9; padding: 10px; border-radius: 5px;">One of the key strategies is [INSERT iTABS CODE HERE FOR "content marketing"] which can drive significant traffic.</pre>
+                <pre style="background: #f1f5f9; padding: 10px; border-radius: 5px;">These [INSERT iTABS CODE HERE FOR "wireless headphones"] are perfect for everyday use.</pre>
                 <p>These placeholders will be replaced with interactive iTabs in the final output.</p>
             </div>
         </div>
 
-        <h2>Step 2: Add Your iTabs Components</h2>
+        <h2>Step 2: Configure Your iTabs Components</h2>
         
         <div class="code-snippets">
             <div class="snippet-container">
                 <div class="snippet-header">
-                    <h3 class="snippet-title">iTabs CSS & JavaScript (Required)</h3>
-                    <button class="snippet-button" id="loadCssJs">Load Sample</button>
+                    <h3 class="snippet-title">Global iTabs Settings</h3>
+                    <button class="snippet-button" id="loadDefaults">Load Defaults</button>
                 </div>
                 <div class="snippet-content">
-                    <textarea id="cssJsCode" placeholder="Paste your iTabs CSS and JavaScript here..."></textarea>
+                    <div class="form-group">
+                        <label class="form-label">iTabs Border Color (HEX)</label>
+                        <input type="text" id="itabsColor" class="form-input" value="#6366f1" placeholder="#6366f1">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Button Color (HEX)</label>
+                        <input type="text" id="buttonColor" class="form-input" value="#6366f1" placeholder="#6366f1">
+                    </div>
                 </div>
             </div>
             
+            <!-- iTabs Component 1 -->
             <div class="snippet-container">
                 <div class="snippet-header">
                     <h3 class="snippet-title">iTabs Component 1</h3>
-                    <div>
-                        <input type="text" id="keyword1" placeholder="Keyword (e.g., 'content marketing')" style="margin-right: 10px; padding: 5px;">
-                        <button class="snippet-button" id="loadSnippet1">Load Sample</button>
-                    </div>
+                    <button class="snippet-button" id="loadSample1">Load Sample</button>
                 </div>
                 <div class="snippet-content">
-                    <textarea id="tabsCode1" placeholder="Paste your first iTabs component code here..."></textarea>
+                    <div class="form-group">
+                        <label class="form-label">Trigger Keyword (what appears in your text)</label>
+                        <input type="text" id="keyword1" class="form-input" placeholder="e.g., 'wireless headphones'">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">iTabs ID (unique identifier)</label>
+                        <input type="text" id="itabId1" class="form-input" placeholder="e.g., 'itab-headphones'">
+                    </div>
+                    
+                    <div class="tabs-editor">
+                        <h4>Tab 1</h4>
+                        <div class="tab-row">
+                            <div class="form-group">
+                                <label class="form-label">Tab Title</label>
+                                <input type="text" id="tab1Title1" class="form-input" placeholder="e.g., 'Features'">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Tab Content (supports HTML)</label>
+                                <textarea id="tab1Content1" class="form-input" style="height: 100px;" placeholder="Enter content for this tab..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Image URL (optional)</label>
+                                <input type="text" id="tab1Image1" class="form-input" placeholder="https://example.com/image.jpg">
+                            </div>
+                        </div>
+                        
+                        <h4>Tab 2</h4>
+                        <div class="tab-row">
+                            <div class="form-group">
+                                <label class="form-label">Tab Title</label>
+                                <input type="text" id="tab1Title2" class="form-input" placeholder="e.g., 'Specs'">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Tab Content (supports HTML)</label>
+                                <textarea id="tab1Content2" class="form-input" style="height: 100px;" placeholder="Enter content for this tab..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Image URL (optional)</label>
+                                <input type="text" id="tab1Image2" class="form-input" placeholder="https://example.com/image.jpg">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="affiliate-section">
+                        <h4 class="affiliate-title">Affiliate Button Settings</h4>
+                        <div class="form-group">
+                            <label class="form-label">Button Text</label>
+                            <input type="text" id="buttonText1" class="form-input" placeholder="e.g., 'Check Price on Amazon'">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Affiliate URL</label>
+                            <input type="text" id="affiliateUrl1" class="form-input" placeholder="Your affiliate link here">
+                        </div>
+                    </div>
                 </div>
             </div>
             
+            <!-- iTabs Component 2 -->
             <div class="snippet-container">
                 <div class="snippet-header">
                     <h3 class="snippet-title">iTabs Component 2</h3>
-                    <div>
-                        <input type="text" id="keyword2" placeholder="Keyword (e.g., 'SEO techniques')" style="margin-right: 10px; padding: 5px;">
-                        <button class="snippet-button" id="loadSnippet2">Load Sample</button>
-                    </div>
+                    <button class="snippet-button" id="loadSample2">Load Sample</button>
                 </div>
                 <div class="snippet-content">
-                    <textarea id="tabsCode2" placeholder="Paste your second iTabs component code here..."></textarea>
+                    <div class="form-group">
+                        <label class="form-label">Trigger Keyword</label>
+                        <input type="text" id="keyword2" class="form-input" placeholder="e.g., 'smartphone cameras'">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">iTabs ID (unique identifier)</label>
+                        <input type="text" id="itabId2" class="form-input" placeholder="e.g., 'itab-cameras'">
+                    </div>
+                    
+                    <div class="tabs-editor">
+                        <h4>Tab 1</h4>
+                        <div class="tab-row">
+                            <div class="form-group">
+                                <label class="form-label">Tab Title</label>
+                                <input type="text" id="tab2Title1" class="form-input" placeholder="e.g., 'Features'">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Tab Content (supports HTML)</label>
+                                <textarea id="tab2Content1" class="form-input" style="height: 100px;" placeholder="Enter content for this tab..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Image URL (optional)</label>
+                                <input type="text" id="tab2Image1" class="form-input" placeholder="https://example.com/image.jpg">
+                            </div>
+                        </div>
+                        
+                        <h4>Tab 2</h4>
+                        <div class="tab-row">
+                            <div class="form-group">
+                                <label class="form-label">Tab Title</label>
+                                <input type="text" id="tab2Title2" class="form-input" placeholder="e.g., 'Specs'">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Tab Content (supports HTML)</label>
+                                <textarea id="tab2Content2" class="form-input" style="height: 100px;" placeholder="Enter content for this tab..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Image URL (optional)</label>
+                                <input type="text" id="tab2Image2" class="form-input" placeholder="https://example.com/image.jpg">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="affiliate-section">
+                        <h4 class="affiliate-title">Affiliate Button Settings</h4>
+                        <div class="form-group">
+                            <label class="form-label">Button Text</label>
+                            <input type="text" id="buttonText2" class="form-input" placeholder="e.g., 'See Best Deals'">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Affiliate URL</label>
+                            <input type="text" id="affiliateUrl2" class="form-input" placeholder="Your affiliate link here">
+                        </div>
+                    </div>
                 </div>
             </div>
             
+            <!-- iTabs Component 3 -->
             <div class="snippet-container">
                 <div class="snippet-header">
                     <h3 class="snippet-title">iTabs Component 3</h3>
-                    <div>
-                        <input type="text" id="keyword3" placeholder="Keyword (e.g., 'conversion optimization')" style="margin-right: 10px; padding: 5px;">
-                        <button class="snippet-button" id="loadSnippet3">Load Sample</button>
-                    </div>
+                    <button class="snippet-button" id="loadSample3">Load Sample</button>
                 </div>
                 <div class="snippet-content">
-                    <textarea id="tabsCode3" placeholder="Paste your third iTabs component code here..."></textarea>
+                    <div class="form-group">
+                        <label class="form-label">Trigger Keyword</label>
+                        <input type="text" id="keyword3" class="form-input" placeholder="e.g., 'cloud storage'">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">iTabs ID (unique identifier)</label>
+                        <input type="text" id="itabId3" class="form-input" placeholder="e.g., 'itab-cloud'">
+                    </div>
+                    
+                    <div class="tabs-editor">
+                        <h4>Tab 1</h4>
+                        <div class="tab-row">
+                            <div class="form-group">
+                                <label class="form-label">Tab Title</label>
+                                <input type="text" id="tab3Title1" class="form-input" placeholder="e.g., 'Features'">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Tab Content (supports HTML)</label>
+                                <textarea id="tab3Content1" class="form-input" style="height: 100px;" placeholder="Enter content for this tab..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Image URL (optional)</label>
+                                <input type="text" id="tab3Image1" class="form-input" placeholder="https://example.com/image.jpg">
+                            </div>
+                        </div>
+                        
+                        <h4>Tab 2</h4>
+                        <div class="tab-row">
+                            <div class="form-group">
+                                <label class="form-label">Tab Title</label>
+                                <input type="text" id="tab3Title2" class="form-input" placeholder="e.g., 'Pricing'">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Tab Content (supports HTML)</label>
+                                <textarea id="tab3Content2" class="form-input" style="height: 100px;" placeholder="Enter content for this tab..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Image URL (optional)</label>
+                                <input type="text" id="tab3Image2" class="form-input" placeholder="https://example.com/image.jpg">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="affiliate-section">
+                        <h4 class="affiliate-title">Affiliate Button Settings</h4>
+                        <div class="form-group">
+                            <label class="form-label">Button Text</label>
+                            <input type="text" id="buttonText3" class="form-input" placeholder="e.g., 'Start Free Trial'">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Affiliate URL</label>
+                            <input type="text" id="affiliateUrl3" class="form-input" placeholder="Your affiliate link here">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -348,40 +570,204 @@
         <div class="preview-container" id="previewContainer" style="display: none;">
             <div class="preview-header">
                 <h2 style="margin: 0;">Preview & Final Code</h2>
-                <button class="btn" id="copyFinalCode">Copy HTML</button>
+                <div>
+                    <button class="btn btn-success" id="copyFinalCode">Copy HTML</button>
+                </div>
             </div>
             <div class="preview-content" id="previewContent">
                 <!-- Preview will go here -->
             </div>
         </div>
     </div>
+    document.getElementById(`affiliateUrl${index}`).value = data.affiliateUrl;
+    }
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Sample data
-            const sampleArticle = `<h1 class="title">How Content Marketing Transformed Our Business</h1>
-<div class="meta">by Sarah Johnson | April 21, 2025</div>
-
-<div class="article-content">
-    <p>When we started our small e-commerce business in 2023, we struggled to attract customers. Our products were great, but nobody knew about them. That's when we discovered the power of [INSERT iTABS CODE HERE FOR "content marketing"].</p>
+    // Merge functionality
+    document.getElementById('mergeButton').addEventListener('click', function() {
+        // Get article content
+        const articleContent = document.getElementById('articleContent').value;
+        
+        if (!articleContent) {
+            alert('Please add your article content first.');
+            return;
+        }
+        
+        // Get global settings
+        const itabsColor = document.getElementById('itabsColor').value || '#6366f1';
+        const buttonColor = document.getElementById('buttonColor').value || '#6366f1';
+        
+        // Generate iTabs components
+        const components = [];
+        for (let i = 1; i <= 3; i++) {
+            const keyword = document.getElementById(`keyword${i}`).value;
+            const itabId = document.getElementById(`itabId${i}`).value;
+            
+            if (keyword && itabId) {
+                // Tab 1 data
+                const tab1Title = document.getElementById(`tab${i}Title1`).value;
+                const tab1Content = document.getElementById(`tab${i}Content1`).value;
+                const tab1Image = document.getElementById(`tab${i}Image1`).value;
+                
+                // Tab 2 data
+                const tab2Title = document.getElementById(`tab${i}Title2`).value;
+                const tab2Content = document.getElementById(`tab${i}Content2`).value;
+                const tab2Image = document.getElementById(`tab${i}Image2`).value;
+                
+                // Affiliate button data
+                const buttonText = document.getElementById(`buttonText${i}`).value;
+                const affiliateUrl = document.getElementById(`affiliateUrl${i}`).value;
+                
+                if (tab1Title && tab1Content && tab2Title && tab2Content && buttonText && affiliateUrl) {
+                    // Create iTabs code
+                    const code = generateiTabsCode(
+                        itabId, 
+                        keyword, 
+                        [
+                            { title: tab1Title, content: tab1Content, image: tab1Image },
+                            { title: tab2Title, content: tab2Content, image: tab2Image }
+                        ],
+                        buttonText,
+                        affiliateUrl
+                    );
+                    
+                    components.push({
+                        keyword: keyword,
+                        code: code
+                    });
+                }
+            }
+        }
+        
+        if (components.length === 0) {
+            alert('Please fill in at least one complete iTabs component.');
+            return;
+        }
+        
+        // Replace placeholders in article content
+        let mergedContent = articleContent;
+        components.forEach(component => {
+            const placeholder = `[INSERT iTABS CODE HERE FOR "${component.keyword}"]`;
+            mergedContent = mergedContent.replace(placeholder, component.code);
+        });
+        
+        // Generate CSS and JavaScript
+        const cssJs = generateCssJs(itabsColor, buttonColor);
+        
+        // Build the final HTML
+        const finalHtml = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iTabs Enhanced Article</title>
+    <style>
+        body {
+            font-family: Georgia, serif;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            color: #333;
+            background: #fafafa;
+        }
+        
+        .title {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            text-align: center;
+        }
+        
+        .meta {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+        
+        .article-content {
+            font-size: 1.1em;
+        }
+        
+        .article-content p {
+            margin-bottom: 25px;
+        }
+        
+        .article-content h2 {
+            color: #2c3e50;
+            margin: 40px 0 20px 0;
+            font-size: 1.8em;
+        }
+    </style>
+    ${cssJs}
+</head>
+<body>
+    ${mergedContent}
+</body>
+</html>`;
+        
+        // Show preview
+        document.getElementById('previewContent').innerHTML = `<pre style="white-space: pre-wrap;">${escapeHtml(finalHtml)}</pre>`;
+        document.getElementById('previewContainer').style.display = 'block';
+        document.getElementById('successMessage').style.display = 'block';
+        
+        // Scroll to preview
+        document.getElementById('previewContainer').scrollIntoView({ behavior: 'smooth' });
+    });
     
-    <h2>The Challenge</h2>
-    <p>Like many startups, we had a limited marketing budget. Traditional advertising was too expensive, and we needed a way to build credibility in our industry while driving targeted traffic to our site.</p>
+    // Copy button functionality
+    document.getElementById('copyFinalCode').addEventListener('click', function() {
+        const content = document.getElementById('previewContent').textContent;
+        navigator.clipboard.writeText(content).then(() => {
+            alert('HTML code copied to clipboard!');
+        });
+    });
     
-    <p>After researching various strategies, we decided to focus on [INSERT iTABS CODE HERE FOR "SEO techniques"] to improve our visibility in search results.</p>
+    // Generate iTabs code for a component
+    function generateiTabsCode(id, keyword, tabs, buttonText, affiliateUrl) {
+        // Generate tabs HTML
+        let tabButtons = '';
+        let tabContent = '';
+        
+        tabs.forEach((tab, index) => {
+            const tabId = `${id}-tab${index + 1}`;
+            const isActive = index === 0 ? 'active' : '';
+            
+            tabButtons += `<button class="tab-button ${isActive}" data-tab="${tabId}">${tab.title}</button>\n`;
+            
+            let tabHtml = `<div id="${tabId}" class="tab-panel ${isActive}">\n`;
+            tabHtml += `  <p>${tab.content}</p>\n`;
+            
+            if (tab.image) {
+                tabHtml += `  <img src="${tab.image}" alt="${tab.title}">\n`;
+            }
+            
+            tabHtml += '</div>\n';
+            tabContent += tabHtml;
+        });
+        
+        // Create the complete iTabs code
+        return `<div id="${id}" class="itab-container">
+  <div class="tab-buttons">
+    ${tabButtons}
+  </div>
+  
+  <div class="tab-content">
+    ${tabContent}
+  </div>
+  <a href="${affiliateUrl}" class="itabs-link-button" target="_blank">${buttonText}</a>
+</div>
+<span class="word-with-itab" data-itab-id="${id}">${keyword}<span class="itab-icon">i</span></span>`;
+    }
     
-    <h2>The Results</h2>
-    <p>Within six months, our organic traffic increased by 320%. More importantly, our [INSERT iTABS CODE HERE FOR "conversion rate"] improved from 1.2% to 3.8% - more than tripling our sales without spending additional money on advertising.</p>
-    
-    <p>Today, our content marketing strategy continues to evolve, but the core principles remain the same: create valuable content that addresses customer needs, optimize for search engines, and convert visitors into customers.</p>
-</div>`;
-
-            const sampleCssJs = `<style>
+    // Generate CSS and JavaScript
+    function generateCssJs(itabsColor, buttonColor) {
+        return `<style>
 .itab-container {
   font-family: -apple-system, system-ui, sans-serif;
   max-width: 100%;
   margin: 20px 0;
-  border: 2px solid #6366f1;
+  border: 2px solid ${itabsColor};
   border-radius: 8px;
   overflow: hidden;
   display: none;
@@ -405,8 +791,8 @@
   color: #64748b;
 }
 .tab-button.active {
-  color: #6366f1;
-  border-bottom: 3px solid #6366f1;
+  color: ${itabsColor};
+  border-bottom: 3px solid ${itabsColor};
   background: white;
 }
 .tab-panel {
@@ -431,7 +817,7 @@
   display: inline-block;
   margin: 0 15px 15px;
   padding: 8px 16px;
-  background: #6366f1;
+  background: ${buttonColor};
   color: white;
   text-decoration: none;
   border-radius: 4px;
@@ -440,7 +826,7 @@
 .itab-icon {
   width: 14px;
   height: 14px;
-  background-color: #4338ca;
+  background-color: ${itabsColor};
   border-radius: 50%;
   display: inline-flex;
   align-items: center;
@@ -497,239 +883,19 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
-<\/script>`;
-
-            const sampleSnippet1 = `<div id="itab-marketing" class="itab-container">
-  <div class="tab-buttons">
-    <button class="tab-button active" data-tab="cm-tab1">What Is It?</button>
-    <button class="tab-button" data-tab="cm-tab2">Benefits</button>
-  </div>
-  
-  <div class="tab-content">
-    <div id="cm-tab1" class="tab-panel active">
-      <p>Content marketing is a strategic approach focused on creating and distributing valuable, relevant content to attract and engage a target audience.</p>
-      <img src="https://via.placeholder.com/600x300/3b82f6/ffffff?text=Content+Marketing" alt="Content Marketing">
-    </div>
-
-    <div id="cm-tab2" class="tab-panel">
-      <p>Key benefits include:<br>
-      • Increased website traffic<br>
-      • Higher brand authority<br>
-      • Better customer engagement<br>
-      • Improved conversion rates</p>
-      <img src="https://via.placeholder.com/600x300/10b981/ffffff?text=Marketing+Benefits" alt="Benefits">
-    </div>
-  </div>
-  <a href="#" class="itabs-link-button">Learn More</a>
-</div>
-<span class="word-with-itab" data-itab-id="itab-marketing">content marketing<span class="itab-icon">i</span></span>`;
-
-            const sampleSnippet2 = `<div id="itab-seo" class="itab-container">
-  <div class="tab-buttons">
-    <button class="tab-button active" data-tab="seo-tab1">Basics</button>
-    <button class="tab-button" data-tab="seo-tab2">Techniques</button>
-  </div>
-  
-  <div class="tab-content">
-    <div id="seo-tab1" class="tab-panel active">
-      <p>SEO (Search Engine Optimization) is the practice of increasing both the quality and quantity of website traffic through organic search engine results.</p>
-      <img src="https://via.placeholder.com/600x300/6366f1/ffffff?text=SEO+Basics" alt="SEO Basics">
-    </div>
-
-    <div id="seo-tab2" class="tab-panel">
-      <p>Effective techniques include:<br>
-      • Keyword research and optimization<br>
-      • Quality content creation<br>
-      • Technical website optimization<br>
-      • Link building strategies</p>
-      <img src="https://via.placeholder.com/600x300/f59e0b/ffffff?text=SEO+Techniques" alt="SEO Techniques">
-    </div>
-  </div>
-  <a href="#" class="itabs-link-button">SEO Guide</a>
-</div>
-<span class="word-with-itab" data-itab-id="itab-seo">SEO techniques<span class="itab-icon">i</span></span>`;
-
-            const sampleSnippet3 = `<div id="itab-conversion" class="itab-container">
-  <div class="tab-buttons">
-    <button class="tab-button active" data-tab="conv-tab1">Definition</button>
-    <button class="tab-button" data-tab="conv-tab2">Optimization</button>
-  </div>
-  
-  <div class="tab-content">
-    <div id="conv-tab1" class="tab-panel active">
-      <p>Conversion rate is the percentage of website visitors who take a desired action, such as making a purchase, signing up for a newsletter, or filling out a contact form.</p>
-      <img src="https://via.placeholder.com/600x300/ec4899/ffffff?text=Conversion+Rate" alt="Conversion Rate">
-    </div>
-
-    <div id="conv-tab2" class="tab-panel">
-      <p>Ways to improve conversion rates:<br>
-      • Clear calls-to-action<br>
-      • Simplified checkout process<br>
-      • A/B testing of page elements<br>
-      • Social proof and testimonials</p>
-      <img src="https://via.placeholder.com/600x300/22c55e/ffffff?text=CRO+Strategies" alt="CRO Strategies">
-    </div>
-  </div>
-  <a href="#" class="itabs-link-button">CRO Tips</a>
-</div>
-<span class="word-with-itab" data-itab-id="itab-conversion">conversion rate<span class="itab-icon">i</span></span>`;
-
-            // Button event listeners
-            document.getElementById('loadSampleArticle').addEventListener('click', function() {
-                document.getElementById('articleContent').value = sampleArticle;
-            });
-
-            document.getElementById('clearArticle').addEventListener('click', function() {
-                document.getElementById('articleContent').value = '';
-            });
-
-            document.getElementById('loadCssJs').addEventListener('click', function() {
-                document.getElementById('cssJsCode').value = sampleCssJs;
-            });
-
-            document.getElementById('loadSnippet1').addEventListener('click', function() {
-                document.getElementById('tabsCode1').value = sampleSnippet1;
-                document.getElementById('keyword1').value = 'content marketing';
-            });
-
-            document.getElementById('loadSnippet2').addEventListener('click', function() {
-                document.getElementById('tabsCode2').value = sampleSnippet2;
-                document.getElementById('keyword2').value = 'SEO techniques';
-            });
-
-            document.getElementById('loadSnippet3').addEventListener('click', function() {
-                document.getElementById('tabsCode3').value = sampleSnippet3;
-                document.getElementById('keyword3').value = 'conversion rate';
-            });
-
-            // Merge functionality
-            document.getElementById('mergeButton').addEventListener('click', function() {
-                // Get content
-                const articleContent = document.getElementById('articleContent').value;
-                const cssJsCode = document.getElementById('cssJsCode').value;
-                
-                // Get iTabs components and their keywords
-                const components = [
-                    {
-                        keyword: document.getElementById('keyword1').value,
-                        code: document.getElementById('tabsCode1').value
-                    },
-                    {
-                        keyword: document.getElementById('keyword2').value,
-                        code: document.getElementById('tabsCode2').value
-                    },
-                    {
-                        keyword: document.getElementById('keyword3').value,
-                        code: document.getElementById('tabsCode3').value
-                    }
-                ];
-                
-                // Filter out empty components
-                const validComponents = components.filter(comp => comp.keyword && comp.code);
-                
-                if (!articleContent) {
-                    alert('Please add your article content.');
-                    return;
-                }
-                
-                if (!cssJsCode) {
-                    alert('Please add the iTabs CSS and JavaScript.');
-                    return;
-                }
-                
-                if (validComponents.length === 0) {
-                    alert('Please add at least one iTabs component with a keyword.');
-                    return;
-                }
-                
-                // Merge content
-                let mergedContent = articleContent;
-                
-                validComponents.forEach(component => {
-                    const placeholder = `[INSERT iTABS CODE HERE FOR "${component.keyword}"]`;
-                    mergedContent = mergedContent.replace(placeholder, component.code);
-                });
-                
-                // Wrap with HTML structure and add CSS/JS
-                const finalHtml = `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iTabs Enhanced Article</title>
-    <style>
-        body {
-            font-family: Georgia, serif;
-            line-height: 1.8;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            color: #333;
-            background: #fafafa;
-        }
-        
-        .title {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            color: #1a1a1a;
-            text-align: center;
-        }
-        
-        .meta {
-            text-align: center;
-            color: #666;
-            margin-bottom: 40px;
-            font-style: italic;
-        }
-        
-        .article-content {
-            font-size: 1.1em;
-        }
-        
-        .article-content p {
-            margin-bottom: 25px;
-        }
-        
-        .article-content h2 {
-            color: #2c3e50;
-            margin: 40px 0 20px 0;
-            font-size: 1.8em;
-        }
-    </style>
-    ${cssJsCode}
-</head>
-<body>
-    ${mergedContent}
-</body>
-</html>`;
-                
-                // Show preview
-                document.getElementById('previewContent').innerHTML = `<pre style="white-space: pre-wrap;">${escapeHtml(finalHtml)}</pre>`;
-                document.getElementById('previewContainer').style.display = 'block';
-                document.getElementById('successMessage').style.display = 'block';
-                
-                // Scroll to preview
-                document.getElementById('previewContainer').scrollIntoView({ behavior: 'smooth' });
-            });
-            
-            // Copy button functionality
-            document.getElementById('copyFinalCode').addEventListener('click', function() {
-                const content = document.getElementById('previewContent').textContent;
-                navigator.clipboard.writeText(content).then(() => {
-                    alert('HTML code copied to clipboard!');
-                });
-            });
-            
-            // Helper function to escape HTML for display
-            function escapeHtml(text) {
-                return text
-                    .replace(/&/g, "&amp;")
-                    .replace(/</g, "&lt;")
-                    .replace(/>/g, "&gt;")
-                    .replace(/"/g, "&quot;")
-                    .replace(/'/g, "&#039;");
-            }
-        });
-    </script>
+</script>`;
+    }
+    
+    // Helper function to escape HTML for display
+    function escapeHtml(text) {
+        return text
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+});
+</script>
 </body>
 </html>
